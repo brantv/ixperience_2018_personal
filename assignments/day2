@@ -96,3 +96,5 @@ while turnNumber <= 9:
     if (board[2][0] == "O") and (board[1][1] == "O") and (board[0][2] == "O"):
         print("Player 2 wins diag")
         exit()
+print("Draw")
+exit()
