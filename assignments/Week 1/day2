@@ -1,0 +1,100 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Jun 26 11:53:17 2018
+
+@author: brant
+"""
+#%%
+# Baby Names
+# did cat * > dump.txt to bring all baby name files into one .txt
+nameCount = 0
+name = input("Enter a name:")
+file = open("dump.txt", "r")
+for line in file:
+    for word in line.split("|"):
+        if (word == name):
+            nameCount += 1
+print(nameCount)
+#%%
+# Tic Tac Toe
+board = [
+        [" ", " ", " "],
+        [" ", " ", " "],
+        [" ", " ", " "]
+        ]
+turnNumber = 1
+rowInput = 4
+colInput = 4
+rowXCount = 0
+rowOCount = 0
+colXCount = 0
+colOCount = 0
+while turnNumber <= 9:
+    print(board)
+    rowInput = 4
+    colInput = 4
+    if (turnNumber % 2 == 1):  #player 1
+        while ((rowInput > 2) or (rowInput < 0) or (colInput > 2) or (colInput < 0)):
+            rowInput = input("Player 1, choose a row (1-3):")
+            rowInput = int(rowInput) - 1
+            colInput = input("Player 1, choose a column (1-3):")
+            colInput = int(colInput) - 1
+    elif (turnNumber % 2 == 0):  #player 2
+        while ((rowInput > 2) or (rowInput < 0) or (colInput > 2) or (colInput < 0)):
+            rowInput = input("Player 2, choose a row (1-3):")
+            rowInput = int(rowInput) - 1
+            colInput = input("Player 2, choose a column (1-3):")
+            colInput = int(colInput) - 1    
+
+    if (board[rowInput][colInput] == (" ")):
+        if (turnNumber % 2 == 1):
+            board[rowInput][colInput] = "X"
+        elif (turnNumber % 2 == 0):
+            board[rowInput][colInput] = "O"
+        turnNumber += 1
+        
+    for x in range(0,3):    
+        for y in range(0,3):
+            if (board[x][y] == "X"):
+                rowXCount += 1
+            elif (board[x][y] == "O"):
+                rowOCount += 1
+            if (rowXCount == 3):
+                print("Player 1 wins row")
+                exit()
+            if (rowOCount == 3):
+                print("Player 2 wins row")
+                exit()
+        rowXCount = 0
+        rowOCount = 0
+        
+    for x in range(0,3):
+        for y in range(0,3):
+            if (board[y][x] == "X"):
+                colXCount += 1
+            elif (board[y][x] == "O"):
+                colOCount += 1
+            if (colXCount == 3):
+                print("Player 1 wins col")
+                exit()
+            if (colOCount == 3):
+                print("Player 2 wins col")
+                exit()
+        colOCount = 0
+        colXCount = 0
+        
+    if (board[0][0] == "X") and (board[1][1] == "X") and (board[2][2] == "X"):
+        print("Player 1 wins diag")
+        exit()
+    if (board[2][0] == "X") and (board[1][1] == "X") and (board[0][2] == "X"):
+        print("Player 1 wins diag")
+        exit()
+    if (board[0][0] == "O") and (board[1][1] == "O") and (board[2][2] == "O"):
+        print("Player 2 wins diag")
+        exit()
+    if (board[2][0] == "O") and (board[1][1] == "O") and (board[0][2] == "O"):
+        print("Player 2 wins diag")
+        exit()
+print("Draw")
+exit()
